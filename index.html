@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AfitCorporate – Corporate Yoga & Wellness</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <style>
+        /* Core */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 rgba(0, 200, 0, 0.18);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(0, 200, 0, 0.28);
+            }
+
+            100% {
+                box-shadow: 0 0 0 rgba(0, 200, 0, 0.18);
+            }
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .pulseGlow {
+            animation: pulseGlow 2.5s ease-in-out infinite;
+        }
+
+        .fadeSlide {
+            animation: fadeSlide 1s ease forwards;
+        }
+
+        @keyframes animatedBg {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animated-background {
+            background: linear-gradient(120deg, #ffffff, #f5f5f5, #eaeaea);
+            background-size: 300% 300%;
+            animation: animatedBg 12s ease infinite;
+        }
+
+        /* Global Aesthetic Enhancements */
+        * {
+            transition: all 0.25s ease;
+        }
+
+        /* Glass helpers */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .lift-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Header */
+        header {
+            backdrop-filter: blur(10px);
+            background: transparent;
+        }
+
+        /* Full‑page Glass Effect */
+        .glass-page {
+            backdrop-filter: blur(14px) brightness(1.02);
+            background: rgba(255, 255, 255, 0.38);
+        }
+
+        /* Flowing blob background shapes */
+        .flowy-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(84px);
+            background: rgba(120, 220, 180, 0.32);
+            mix-blend-mode: screen;
+            animation: blobMove 22s infinite ease-in-out, blobGlow 6s ease-in-out infinite;
+        }
+
+        .blob2 {
+            background: rgba(80, 200, 150, 0.28);
+            animation-duration: 28s;
+        }
+
+        .blob3 {
+            background: rgba(150, 240, 200, 0.26);
+            animation-duration: 26s;
+        }
+
+        @keyframes blobGlow {
+            0% {
+                box-shadow: 0 0 60px rgba(120, 220, 180, 0.35);
+            }
+
+            50% {
+                box-shadow: 0 0 140px rgba(120, 220, 180, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 60px rgba(120, 220, 180, 0.35);
+            }
+        }
+
+        @keyframes blobMove {
+            0% {
+                transform: translate(-10%, -10%) scale(1);
+            }
+
+            33% {
+                transform: translate(40%, 10%) scale(1.2);
+            }
+
+            66% {
+                transform: translate(10%, 40%) scale(0.9);
+            }
+
+            100% {
+                transform: translate(-10%, -10%) scale(1);
+            }
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #16a34a;
+        }
+
+        .btn-primary:hover {
+            background-color: #15803d;
+        }
+
+        /* Go to top button */
+        #goTopBtn {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+    </style>
+</head>
+
+<body class="animated-background glass-page">
+
+    <div class="flowy-container">
+        <div class="blob" style="top:8%; left:4%;"></div>
+        <div class="blob blob2" style="top:50%; left:60%;"></div>
+        <div class="blob blob3" style="top:20%; left:80%;"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="py-6 bg-transparent">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6">
+            <div class="flex items-center gap-3">
+                <img src="assets/logo.png" alt="AfitCorporate Logo" class="w-20 h-20 object-contain" />
+                <div>
+                    <div class="text-lg font-semibold">AfitCorporate</div>
+                    <div class="text-xs text-gray-500">Corporate Yoga & Workplace Wellness</div>
+                </div>
+            </div>
+
+            <!-- Mobile Button -->
+            <button id="menuBtn" class="md:hidden p-2 rounded border border-green-300">☰</button>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex gap-6 text-sm">
+                <a href="#team" class="hover:underline">Team</a>
+                <a href="#about" class="hover:underline">About</a>
+                <a href="#services" class="hover:underline">Services</a>
+                <a href="#portfolio" class="hover:underline">Portfolio</a>
+                <a href="#testimonials" class="hover:underline">Testimonials</a>
+                <a href="#contact" class="font-medium text-green-600 hover:underline">Book a Session</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <nav id="mobileMenu" class="hidden flex-col gap-4 text-sm px-6 pt-4 pb-6 bg-transparent md:hidden border-t">
+            <a href="#about" class="block">About</a>
+            <a href="#team" class="block">Team</a>
+            <a href="#services" class="block">Services</a>
+            <a href="#portfolio" class="block">Portfolio</a>
+            <a href="#testimonials" class="block">Testimonials</a>
+            <a href="#contact" class="block text-green-600 font-medium">Book a Session</a>
+        </nav>
+    </header>
+
+    <div class="max-w-5xl mx-auto text-center px-4">
+
+        <!-- HERO -->
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 px-6 items-center fadeSlide">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Corporate Yoga for Focused, Resilient
+                        Teams</h1>
+                    <p class="mt-4 text-green-700">Tailored yoga, breathwork, and mobility sessions for busy employees —
+                        delivered on-site or virtually.</p>
+
+                    <div class="mt-6 flex gap-3 justify-center">
+                        <a href="#contact" class="px-5 py-3 bg-green-600 text-white rounded-lg pulseGlow">Book a
+                            Session</a>
+                        <a href="#services" class="px-5 py-3 border border-green-300 rounded-lg">View Services</a>
+                    </div>
+                </div>
+
+                <div class=" rounded-2xl">
+                    <img class="float" src="assets/Beige and White Be Yourself Square Pillow.png"
+                        alt="Yoga Illustration" />
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="reveal py-16 bg-transparent w-100 ">
+            <div class="max-w-7xl mx-auto  gap-12 px-6">
+                <div>
+                    <h2 class="text-2xl font-semibold">About AfitCorporate</h2>
+                    <p class="mt-4 text-green-700">We deliver accessible, science-backed yoga programs for corporate
+                        teams. Sessions improve posture, reduce stress, and enhance focus.</p>
+                    <ul class="mt-4 space-y-2 text-green-800">
+                        <li>• HR-friendly curriculum</li>
+                        <li>• Virtual & on-site options</li>
+                        <li>• Desk-friendly micro sessions</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TEAM SECTION -->
+        <section id="team" class="reveal py-16 bg-transparent">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-2xl font-semibold">Meet Our Team</h2>
+
+                <div class="mt-10 flex flex-col md:flex-row md:justify-center gap-8">
+
+                    <div class="p-6  text-center">
+                        <img src="assets/Me.png" class="object-cover rounded-full mx-auto mb-4" style="width: 70%;" />
+                        <h3 class="text-xl font-semibold text-green-800">Siddharth Kote</h3>
+                        <p class="text-green-700 text-sm mt-2">Yoga & Breathwork Coach</p>
+                        <p class="text-sm text-gray-500 mt-2">Specialist in corporate stress‑reduction and
+                            energy‑building routines.</p>
+                    </div>
+
+                    <div class="p-6  text-center">
+                        <img src="assets/Me.png" class="object-cover rounded-full mx-auto mb-4" style="width: 70%;" />
+                        <h3 class="text-xl font-semibold text-green-800">Siddharth Kote</h3>
+                        <p class="text-green-700 text-sm mt-2">Yoga & Breathwork Coach</p>
+                        <p class="text-sm text-gray-500 mt-2">Specialist in corporate stress‑reduction and
+                            energy‑building routines.</p>
+                    </div>
+
+                    <!-- 
+                    <div class="p-6 rounded-xl text-center">
+                        <img src="https://via.placeholder.com/200x200?text=Coach+2"
+                            class="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+                        <h3 class="text-xl font-semibold text-green-800">Rohan Mehta</h3>
+                        <p class="text-green-700 text-sm mt-2">Mobility & Posture Expert</p>
+                        <p class="text-sm text-gray-500 mt-2">Helps employees reduce desk pain and improve workplace
+                            mobility.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl text-center">
+                        <img src="https://via.placeholder.com/200x200?text=Coach+3"
+                            class="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+                        <h3 class="text-xl font-semibold text-green-800">Neha Kapoor</h3>
+                        <p class="text-green-700 text-sm mt-2">Mindfulness Instructor</p>
+                        <p class="text-sm text-gray-500 mt-2">Guides meditation, mental clarity sessions, and calm‑focus
+                            practices.</p>
+                    </div> -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="reveal py-16">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-2xl font-semibold">Services</h2>
+
+                <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-5 rounded-xl text-center">
+                        <img src="https://via.placeholder.com/100?text=Yoga" alt="Desk Yoga"
+                            class="w-16 h-16 mx-auto mb-3 rounded" />
+                        <h3 class="font-medium">Desk Yoga (20–30 min)</h3>
+                        <p class="mt-2 text-sm text-green-700">Quick posture & mobility sessions.</p>
+                    </div>
+                    <div class="p-5 rounded-xl text-center">
+                        <img src="https://via.placeholder.com/100?text=Yoga" alt="Service Icon"
+                            class="w-16 h-16 mx-auto mb-3 rounded" />
+                        <h3 class="font-medium">On-site Group Classes</h3>
+                        <p class="mt-2 text-sm text-green-700">Full-length guided classes.</p>
+                    </div>
+                    <div class="p-5 rounded-xl text-center">
+                        <img src="https://via.placeholder.com/100?text=Yoga" alt="Service Icon"
+                            class="w-16 h-16 mx-auto mb-3 rounded" />
+                        <h3 class="font-medium">Virtual Workshops</h3>
+                        <p class="mt-2 text-sm text-green-700">Stress, breathwork & mindfulness.</p>
+                    </div>
+                    <div class="p-5 rounded-xl text-center">
+                        <img src="https://via.placeholder.com/100?text=Yoga" alt="Service Icon"
+                            class="w-16 h-16 mx-auto mb-3 rounded" />
+                        <h3 class="font-medium">Monthly Programs</h3>
+                        <p class="mt-2 text-sm text-green-700">Ongoing wellness for teams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section id="portfolio" class="reveal py-16 bg-transparent">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-2xl font-semibold">Portfolio</h2>
+                <p class="text-sm text-green-700 mt-2">Snapshots from corporate yoga sessions.</p>
+
+                <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="h-40 bg-green-200 rounded-lg flex items-center justify-center text-gray-500"><img
+                            src="https://via.placeholder.com/300?text=Session+1" alt="Session 1"
+                            class="w-full h-full object-cover" /></div>
+                    <div class="h-40 bg-green-200 rounded-lg flex items-center justify-center text-gray-500"><img
+                            src="https://via.placeholder.com/300?text=Session+2" alt="Session 2"
+                            class="w-full h-full object-cover" /></div>
+                    <div class="h-40 bg-green-200 rounded-lg flex items-center justify-center text-gray-500"><img
+                            src="https://via.placeholder.com/300?text=Session+3" alt="Session 3"
+                            class="w-full h-full object-cover" /></div>
+                    <div class="h-40 bg-green-200 rounded-lg flex items-center justify-center text-gray-500"><img
+                            src="https://via.placeholder.com/300?text=Session+4" alt="Session 4"
+                            class="w-full h-full object-cover" /></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS PAGE -->
+        <section id="testimonials" class="reveal py-16 bg-transparent">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-2xl font-semibold">Testimonials</h2>
+                <p class="text-sm text-green-700 mt-2">What our clients say about AfitCorporate.</p>
+
+                <div class="mt-8 flex" style="flex-wrap: initial;">
+                    <div class="p-6 rounded-xl   ">
+                        <p class="text-green-800">“After my session with a fit corporate, I understood than being fit or
+                            practising yogic techniques to be better at workplace is not just an exercise, it is more
+                            than exercise. I think, it helped me connect with myself. Staying Fit at workplace is like a
+                            cherry on the top. It is unreal and sureal and exicting. I am looking forward towards
+                            upcoming sessions with a fit corporate.
+                            ”</p>
+                        <div class="mt-3 text-sm text-gray-500">— Akashada
+                            , Air hostess- Air India</div>
+                    </div> 
+                    <!-- <div class="p-6 rounded-xl   ">
+                        <p class="text-green-800">“Engaging, professional, and incredibly effective for our remote
+                            team.”</p>
+                        <div class="mt-3 text-sm text-gray-500">— Operations Manager, SaaS Startup</div>
+                    </div>
+                    <div class="p-6 rounded-xl   ">
+                        <p class="text-green-800">“Our company loved the desk yoga sessions. Productivity definitely
+                            improved.”</p>
+                        <div class="mt-3 text-sm text-gray-500">— Wellness Coordinator, Tech Firm</div>
+                    </div>
+                    <div class="p-6 rounded-xl   ">
+                        <p class="text-green-800">“We appreciated how the sessions were inclusive and
+                            beginner‑friendly.”</p>
+                        <div class="mt-3 text-sm text-gray-500">— People & Culture, Marketing Agency</div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM -->
+        <section id="contact" class="reveal py-16">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+
+                <div>
+                    <h2 class="text-2xl font-semibold">Corporate Yoga Inquiry</h2>
+                    <p class="mt-2 text-green-700">Fill in your details and we’ll respond with a tailored quote.</p>
+
+                    <form
+                        class="mt-6 p-6 bg-transparent rounded-xl space-y-4 border border-green-300 shadow-lg text-left">
+                        <div class="text-left"><label class="text-sm font-medium">Company Name</label>
+                            <input class="w-full mt-1 p-2 border rounded" />
+                        </div>
+                        <div class="text-left"><label class="text-sm font-medium">Contact Person</label>
+                            <input class="w-full mt-1 p-2 border rounded" />
+                        </div>
+                        <div class="text-left"><label class="text-sm font-medium">Email</label>
+                            <input type="email" class="w-full mt-1 p-2 border rounded" />
+                        </div>
+                        <div class="text-left"><label class="text-sm font-medium">Phone</label>
+                            <input class="w-full mt-1 p-2 border rounded" />
+                        </div>
+                        <div class="text-left"><label class="text-sm font-medium">Preferred Schedule</label>
+                            <input class="w-full mt-1 p-2 border rounded"
+                                placeholder="e.g., Week of Dec 10, mornings" />
+                        </div>
+                        <div class="text-left"><label class="text-sm font-medium">Notes</label>
+                            <textarea class="w-full mt-1 p-2 border rounded" rows="4"></textarea>
+                        </div>
+
+                        <button class="px-4 py-2 bg-green-600 text-white rounded ">Submit</button>
+                    </form>
+                </div>
+
+                <div class="p-6 rounded-xl    text-green-800 text-sm">
+                    <h3 class="font-semibold">Why Choose AfitCorporate?</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li>• Designed for busy teams</li>
+                        <li>• Measurable wellness outcomes</li>
+                        <li>• Virtual + on-site flexibility</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- GO TO TOP BUTTON -->
+        <button id="goTopBtn"
+            class="hidden fixed bottom-6 right-6 bg-green-600 text-white p-3 rounded-full -lg text-xl">↑</button>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="py-8 text-center text-sm text-gray-200 bg-gray-900 border-t border-gray-700">© 2025 AfitCorporate
+        <div class="mt-4 flex items-center justify-center gap-6 text-gray-300 text-lg">
+            <a href="https://instagram.com/afitcorporate" target="_blank" class="hover:text-green-400">📸</a>
+            <a href="https://facebook.com/afitcorporate" target="_blank" class="hover:text-green-400">📘</a>
+            <a href="https://linkedin.com/company/afitcorporate" target="_blank" class="hover:text-green-400">💼</a>
+            <a href="mailto:hello@afitcorporate.com" class="hover:text-green-400">✉️</a>
+            <a href="tel:+1234567890" class="hover:text-green-400">📞</a>
+        </div>
+    </footer>
+
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const trigger = window.innerHeight * 0.85;
+            reveals.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < trigger) el.classList.add('visible');
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Go To Top Button
+        const goTopBtn = document.getElementById('goTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) goTopBtn.classList.remove('hidden');
+            else goTopBtn.classList.add('hidden');
+        });
+        goTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Theme Toggle (removed)
+
+    </script>
+</body>
+
+</html>
